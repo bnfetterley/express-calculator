@@ -3,6 +3,9 @@ var express = require("express");
 var app = express();
 var PORT = 8080;
 
+
+const functions = require ("./functions")
+
 app.get('/:operator/:num1/:num2', function(req,res){
 	
 	var operator = req.params.operator
@@ -12,7 +15,7 @@ app.get('/:operator/:num1/:num2', function(req,res){
 
 	switch(operator){
 		case "addition":
-		result = add(num1, num2);
+		result = functions.add(num1, num2);
 		break;
 
 		case "subtraction":
@@ -31,21 +34,7 @@ app.get('/:operator/:num1/:num2', function(req,res){
 		result = "Sorry, please enter a valid operator!"
 	}
 
-	function add(a, b){
-		return a + b
-	}
-
-	function subtract(a, b){
-		return a - b
-	}
-
-	function multiply(a, b){
-		return a * b
-	}
-
-	function divide(a, b){
-		return a / b
-	}
+	
 
 	res.json(result);
 });
@@ -54,7 +43,12 @@ app.get("/", function(req, res){
 	res.send("hello! please type some math y'all")
 });
 
+
 //listener
 app.listen(PORT, function(){
 	console.log("App listening on PORT:" + PORT);
 });
+
+// module.exports = {
+// 	add
+// }
